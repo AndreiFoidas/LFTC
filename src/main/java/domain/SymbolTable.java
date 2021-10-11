@@ -3,11 +3,11 @@ package domain;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class HashTable {
+public class SymbolTable {
     private final int size;
     private ArrayList<LinkedList<String>> table;
 
-    public HashTable(int size){
+    public SymbolTable(int size){
         this.size = size;
 
         this.table = new ArrayList<>();
@@ -47,7 +47,7 @@ public class HashTable {
                 else
                     break;
             }
-            // System.out.println("Position: " + listPosition + ": " + listIndex);
+
             return new Pair(listPosition, listIndex);
         }
         return null;

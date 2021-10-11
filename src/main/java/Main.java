@@ -1,8 +1,9 @@
-import domain.HashTable;
+import domain.SymbolTable;
 
 public class Main {
-    public static void main(String[] args) {
-        HashTable ht = new HashTable(20);
+
+    static void testSymbolTable(){
+        SymbolTable ht = new SymbolTable(20);
         ht.add("a");
         ht.add("b");
         ht.add("c");
@@ -18,7 +19,13 @@ public class Main {
 
         System.out.println(ht.getPosition("a"));
         System.out.println(ht.getPosition("b"));
+        System.out.println(ht.getPosition("d"));
         System.out.println(ht.getPosition("abc"));
         System.out.println(ht.getPosition("cba"));
+    }
+
+
+    public static void main(String[] args) {
+        testSymbolTable();
     }
 }
