@@ -17,11 +17,11 @@ public class Main {
         System.out.println(ht.contains("d"));
         System.out.println(ht.contains("e"));
 
-        System.out.println(ht.getPosition("a"));
-        System.out.println(ht.getPosition("b"));
-        System.out.println(ht.getPosition("d"));
-        System.out.println(ht.getPosition("abc"));
-        System.out.println(ht.getPosition("cba"));
+        System.out.println(ht.search("a"));
+        System.out.println(ht.search("b"));
+        System.out.println(ht.search("d"));
+        System.out.println(ht.search("abc"));
+        System.out.println(ht.search("cba"));
     }
 
 

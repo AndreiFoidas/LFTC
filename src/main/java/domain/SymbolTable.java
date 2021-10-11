@@ -37,7 +37,7 @@ public class SymbolTable {
         return true;
     }
 
-    public Pair getPosition(String key){
+    public Pair search(String key){
         if (this.contains(key)){
             int listPosition = this.hash(key);
             int listIndex = 0;
