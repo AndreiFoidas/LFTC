@@ -1,8 +1,8 @@
 package domain;
 
 public class Pair {
-    private  final int first;
-    private final int second;
+    private int first;
+    private int second;
 
     public Pair(int first, int second){
         this.first = first;
@@ -23,5 +23,13 @@ public class Pair {
 
     public void setSecond(int second) {
         this.second = second;
+    }
+
+    @Override
+    public String toString() {
+        return "Pair{" +
+                "first=" + first +
+                ", second=" + second +
+                '}';
     }
 }

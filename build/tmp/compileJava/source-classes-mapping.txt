@@ -1,4 +1,6 @@
-domain/HashTable.java
- domain.HashTable
 Main.java
  Main
+domain/HashTable.java
+ domain.HashTable
+domain/Pair.java
+ domain.Pair

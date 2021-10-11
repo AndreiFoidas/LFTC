@@ -48,8 +48,8 @@ public class HashTable {
                     break;
             }
             // System.out.println("Position: " + listPosition + ": " + listIndex);
+            return new Pair(listPosition, listIndex);
         }
-        Pair p = new Pair(1, 2);
-        return p;
+        return null;
     }
 }
