@@ -1,6 +1,12 @@
 domain/Pair.java
  domain.Pair
+domain/Codification.java
+ domain.Codification
 domain/SymbolTable.java
  domain.SymbolTable
+domain/ProgramInternalForm.java
+ domain.ProgramInternalForm
+domain/Scanner.java
+ domain.Scanner
 Main.java
  Main
