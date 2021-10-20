@@ -8,7 +8,7 @@ public class Codification {
 
     private final String[] separators = {"[", "]", "(", ")", "{", "}", ":", ";", " ", "\n", "\t"};
     private final String[] operators = {"+", "-", "/", "*", "%", "=", "<", "<=", "==", ">=", ">", "!=", "!", "&&", "||"};
-    private final String[] reservedWords = {"int", "string", "bool", "char", "return", "if", "else", "while", "do", "read", "write", "struct"};
+    private final String[] reservedWords = {"int", "string", "bool", "char", "return", "if", "else", "while", "do", "read", "write", "struct", "START", "END."};
 
     private HashMap<String, Integer> codes;
 
