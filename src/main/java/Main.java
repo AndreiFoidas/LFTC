@@ -1,3 +1,4 @@
+import domain.Scanner;
 import domain.SymbolTable;
 
 public class Main {
@@ -26,6 +27,18 @@ public class Main {
 
 
     public static void main(String[] args) {
-        testSymbolTable();
+        //testSymbolTable();
+        Scanner s = new Scanner();
+        s.scanFile("src/files/p1.txt");
+        System.out.println();
+        Scanner s1 = new Scanner();
+        s1.scanFile("src/files/p2.txt");
+        System.out.println();
+        Scanner s2 = new Scanner();
+        s2.scanFile("src/files/p3.txt");
+        System.out.println();
+        Scanner s3 = new Scanner();
+        s3.scanFile("src/files/p1err.txt");
+        System.out.println();
     }
 }
