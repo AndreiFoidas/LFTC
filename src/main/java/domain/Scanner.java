@@ -20,12 +20,18 @@ public class Scanner {
             BufferedReader br = new BufferedReader(new FileReader(file));
             int i=0;
             String line;
+            boolean lexicallyCorrect = true;
             while((line = br.readLine()) != null){
                 List<String> tokenList = this.tokenizeLine(line);
                 System.out.println(tokenList);
-                this.scanLine(tokenList, i);
+                boolean result = this.scanLine(tokenList, i);
+                lexicallyCorrect = lexicallyCorrect && result;
                 i++;
             }
+            if(lexicallyCorrect)
+                System.out.println("Program is correct!");
+            else
+                System.out.println("Program has lexical errors!");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,7 +98,9 @@ public class Scanner {
         return tokens;
     }
 
-    public void scanLine(List<String> tokens, int line) {
+    public boolean scanLine(List<String> tokens, int line) {
+        boolean lexicallyCorrect = true;
+        ArrayList<String> specialCase = new ArrayList<>(Arrays.asList("(", "=", "==", "<", ">", "<=", ">=", "!="));
         String lastToken = "";
         for(int i=0; i < tokens.size(); ++i){
             String token = tokens.get(i);
@@ -107,7 +115,7 @@ public class Scanner {
                 this.pif.add(code, new Pair(-1, -1));
             }
             else if ((token.equals("-") || token.equals("+")) && (this.isNumber(tokens.get(i + 1))) &&
-                    (lastToken.equals("=") || lastToken.equals("("))){
+                    specialCase.contains(lastToken)){
                 token += tokens.get(i + 1);
                 i++;
                 if (!token.equals("-0")){
@@ -116,6 +124,7 @@ public class Scanner {
                 }
                 else {
                     System.out.println("Error at line: " + line + ". Invalid token " + token);
+                    lexicallyCorrect = false;
                 }
             }
             else if (this.isOperator(token) || this.isSeparator(token) || this.isReservedWord(token)){
@@ -124,9 +133,12 @@ public class Scanner {
             }
             else {
                 System.out.println("Error at line: " + line + ". Invalid token " + token);
+                lexicallyCorrect = false;
             }
             lastToken = token;
         }
+
+        return lexicallyCorrect;
     }
 
     public boolean isSeparator(String token) {
@@ -156,9 +168,5 @@ public class Scanner {
     public boolean isNumber(String token){
         String number = "^([1-9][0-9]*)|0$";
         return token.matches(number);
-    }
-
-    public boolean isCharacter(char c){
-        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_';
     }
 }
