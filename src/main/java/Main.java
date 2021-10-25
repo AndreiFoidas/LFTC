@@ -28,7 +28,7 @@ public class Main {
 
     public static void main(String[] args) {
         //testSymbolTable();
-        Scanner s = new Scanner();
+        /*Scanner s = new Scanner();
         s.scanFile("src/files/p1.txt");
         System.out.println();
         Scanner s1 = new Scanner();
@@ -36,7 +36,7 @@ public class Main {
         System.out.println();
         Scanner s2 = new Scanner();
         s2.scanFile("src/files/p3.txt");
-        System.out.println();
+        System.out.println();*/
         Scanner s3 = new Scanner();
         s3.scanFile("src/files/p1err.txt");
         System.out.println();

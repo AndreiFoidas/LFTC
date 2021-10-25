@@ -1,0 +1,64 @@
+
+Symbol Table
+Pos	Token
+1	[3]
+47	[a, 10]
+48	[b]
+49	[1]
+
+Token START on position: (-1,-1)
+Token int on position: (-1,-1)
+Token a on position: (47,0)
+Token ; on position: (-1,-1)
+Token int on position: (-1,-1)
+Token b on position: (48,0)
+Token ; on position: (-1,-1)
+Token int on position: (-1,-1)
+Error at line: 3. Invalid token 2c
+Token ; on position: (-1,-1)
+Token read on position: (-1,-1)
+Token ( on position: (-1,-1)
+Token a on position: (47,0)
+Token ) on position: (-1,-1)
+Token ; on position: (-1,-1)
+Token b on position: (48,0)
+Token = on position: (-1,-1)
+Error at line: 5. Invalid token -0
+Token ; on position: (-1,-1)
+Token b on position: (48,0)
+Token = on position: (-1,-1)
+Token 10 on position: (47,1)
+Token - on position: (-1,-1)
+Token 3 on position: (1,0)
+Token ; on position: (-1,-1)
+Token b on position: (48,0)
+Token = on position: (-1,-1)
+Error at line: 7. Invalid token 012
+Token ; on position: (-1,-1)
+Token b on position: (48,0)
+Token = on position: (-1,-1)
+Error at line: 8. Invalid token 'abc'
+Token ; on position: (-1,-1)
+Token b on position: (48,0)
+Token = on position: (-1,-1)
+Error at line: 9. Invalid token "ab;
+Token while on position: (-1,-1)
+Token ( on position: (-1,-1)
+Token a on position: (47,0)
+Token >= on position: (-1,-1)
+Token b on position: (48,0)
+Token ) on position: (-1,-1)
+Token { on position: (-1,-1)
+Token a on position: (47,0)
+Token = on position: (-1,-1)
+Token a on position: (47,0)
+Token + on position: (-1,-1)
+Token 1 on position: (49,0)
+Token ; on position: (-1,-1)
+Token } on position: (-1,-1)
+Token write on position: (-1,-1)
+Token ( on position: (-1,-1)
+Token a on position: (47,0)
+Token ) on position: (-1,-1)
+Token ; on position: (-1,-1)
+Token END. on position: (-1,-1)

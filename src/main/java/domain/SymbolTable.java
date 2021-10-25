@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class SymbolTable {
     private final int size;
-    private ArrayList<LinkedList<String>> table;
+    private final ArrayList<LinkedList<String>> table;
 
     public SymbolTable(int size){
         this.size = size;
@@ -51,5 +51,19 @@ public class SymbolTable {
             return new Pair(listPosition, listIndex);
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder st = new StringBuilder("\nSymbol Table\nPos\tToken\n");
+        for (int i = 0; i < size; i++) {
+            if (table.get(i).size() != 0) {
+                st.append(i);
+                st.append('\t');
+                st.append(table.get(i));
+                st.append('\n');
+            }
+        }
+        return st.toString();
     }
 }

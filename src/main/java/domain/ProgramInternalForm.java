@@ -14,4 +14,11 @@ public class ProgramInternalForm {
     public HashMap<Integer, Pair> getPIF() {
         return this.pif;
     }
+
+    @Override
+    public String toString() {
+        return "ProgramInternalForm{" +
+                "pif=" + pif +
+                '}';
+    }
 }

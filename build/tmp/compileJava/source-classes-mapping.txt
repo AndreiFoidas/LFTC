@@ -1,11 +1,11 @@
-domain/Pair.java
- domain.Pair
 domain/Codification.java
  domain.Codification
-domain/SymbolTable.java
- domain.SymbolTable
+domain/Pair.java
+ domain.Pair
 domain/ProgramInternalForm.java
  domain.ProgramInternalForm
+domain/SymbolTable.java
+ domain.SymbolTable
 domain/Scanner.java
  domain.Scanner
 Main.java
