@@ -1,9 +1,10 @@
+import domain.FiniteAutomaton;
 import domain.Scanner;
 import domain.SymbolTable;
 
 public class Main {
 
-    static void testSymbolTable(){
+    public static void testSymbolTable(){
         SymbolTable ht = new SymbolTable(20);
         ht.add("a");
         ht.add("b");
@@ -25,6 +26,11 @@ public class Main {
         System.out.println(ht.search("cba"));
     }
 
+    public static void testFiniteAutomaton(){
+        FiniteAutomaton finiteAutomaton = new FiniteAutomaton("src/files/FA.in");
+        MenuFiniteAutomaton menu = new MenuFiniteAutomaton(finiteAutomaton);
+        menu.run();
+    }
 
     public static void main(String[] args) {
         //testSymbolTable();
@@ -36,9 +42,11 @@ public class Main {
         System.out.println();
         Scanner s2 = new Scanner();
         s2.scanFile("src/files/p3.txt");
-        System.out.println();*/
+        System.out.println();
         Scanner s3 = new Scanner();
         s3.scanFile("src/files/p1err.txt");
         System.out.println();
+        */
+        testFiniteAutomaton();
     }
 }
