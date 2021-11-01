@@ -6,9 +6,9 @@ import java.io.FileReader;
 import java.util.*;
 
 public class FiniteAutomaton {
-    private List<String> states, alphabet, finalStates;
+    private final List<String> states, alphabet, finalStates;
     private String initialState;
-    private Map<AbstractMap.SimpleEntry<String, String>, List<String>> transitions;
+    private final Map<AbstractMap.SimpleEntry<String, String>, List<String>> transitions;
 
     public FiniteAutomaton(String filename){
         this.states = new ArrayList<>();
@@ -87,7 +87,7 @@ public class FiniteAutomaton {
         for (AbstractMap.SimpleEntry<String, String> key: keys){
             if (!this.states.contains(key.getKey()))
                 return false;
-            if (!this.states.contains(key.getValue()))
+            if (!this.alphabet.contains(key.getValue()))
                 return false;
             List<String> list = this.transitions.get(key);
             for(String token:list){
@@ -99,7 +99,24 @@ public class FiniteAutomaton {
     }
 
     public boolean acceptsSequence(String sequence){
-        return true;
+        if(this.isDeterministic()){
+            String state = this.initialState;
+            for(char c: sequence.toCharArray()){
+                var key = new AbstractMap.SimpleEntry<>(state, String.valueOf(c));
+                if(this.transitions.containsKey(key)){
+                    state = this.transitions.get(key).get(0);
+                }
+                else {
+                    return false;
+                }
+            }
+
+            return this.finalStates.contains(state);
+        }
+        else{
+            System.out.println("This is not a DFA!");
+            return false;
+        }
     }
 
     public List<String> getStates() {

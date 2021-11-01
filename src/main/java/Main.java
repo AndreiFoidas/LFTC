@@ -27,7 +27,7 @@ public class Main {
     }
 
     public static void testFiniteAutomaton(){
-        FiniteAutomaton finiteAutomaton = new FiniteAutomaton("src/files/FA.in");
+        FiniteAutomaton finiteAutomaton = new FiniteAutomaton("src/files/identifierFA.in");
         MenuFiniteAutomaton menu = new MenuFiniteAutomaton(finiteAutomaton);
         menu.run();
     }
