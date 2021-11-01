@@ -10,3 +10,7 @@ domain/Scanner.java
  domain.Scanner
 Main.java
  Main
+MenuFiniteAutomaton.java
+ MenuFiniteAutomaton
+domain/FiniteAutomaton.java
+ domain.FiniteAutomaton

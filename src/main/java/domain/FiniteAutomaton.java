@@ -68,11 +68,33 @@ public class FiniteAutomaton {
     }
 
     public boolean isDeterministic(){
-        //this.transitions.
+        var keys = this.transitions.keySet();
+        for (AbstractMap.SimpleEntry<String, String> key: keys){
+            if (this.transitions.get(key).size() > 1)
+                return false;
+        }
         return true;
     }
 
     public boolean isValid(){
+        if (!this.states.contains(this.initialState))
+            return false;
+        for (String fState: this.finalStates){
+            if(!this.states.contains(fState))
+                return false;
+        }
+        var keys = this.transitions.keySet();
+        for (AbstractMap.SimpleEntry<String, String> key: keys){
+            if (!this.states.contains(key.getKey()))
+                return false;
+            if (!this.states.contains(key.getValue()))
+                return false;
+            List<String> list = this.transitions.get(key);
+            for(String token:list){
+                if(!this.states.contains(token))
+                    return false;
+            }
+        }
         return true;
     }
 
