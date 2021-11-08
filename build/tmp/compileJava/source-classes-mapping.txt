@@ -6,11 +6,11 @@ domain/ProgramInternalForm.java
  domain.ProgramInternalForm
 domain/SymbolTable.java
  domain.SymbolTable
+domain/Scanner.java
+ domain.Scanner
 domain/FiniteAutomaton.java
  domain.FiniteAutomaton
 MenuFiniteAutomaton.java
  MenuFiniteAutomaton
-domain/Scanner.java
- domain.Scanner
 Main.java
  Main
