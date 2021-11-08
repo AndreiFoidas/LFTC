@@ -11,7 +11,7 @@ public class Scanner {
     private final SymbolTable symbolTable = new SymbolTable(50);
     private final ProgramInternalForm pif = new ProgramInternalForm();
     private final Codification codification = new Codification();
-    private final FiniteAutomaton finiteAutomaton = new FiniteAutomaton("");
+    private final FiniteAutomaton finiteAutomaton = new FiniteAutomaton("src/files/identifierFA.in");
 
     public Scanner() {
     }
@@ -194,7 +194,8 @@ public class Scanner {
     public boolean isIdentifier(String token){
         //String pattern = "^[a-zA-Z_]([a-zA-Z0-9_]*$)";
         //return token.matches(pattern);
-        this.finiteAutomaton.readFromFile("identifierFA.in");
+        if(!this.finiteAutomaton.getFileName().equals("src/files/identifierFA.in"))
+            this.finiteAutomaton.readFromFile("src/files/identifierFA.in");
         return this.finiteAutomaton.acceptsSequence(token);
     }
 
@@ -202,7 +203,8 @@ public class Scanner {
         //String number = "^([1-9][0-9]*)|0$";
         String string = "^\"[a-zA-Z0-9_.:;,?!*' ]*\"$";
         String character = "^\'[a-zA-Z0-9_.:;,?!*\" ]\'$";
-        this.finiteAutomaton.readFromFile("integerFA.in");
+        if(!this.finiteAutomaton.getFileName().equals("src/files/integerFA.in"))
+            this.finiteAutomaton.readFromFile("src/files/integerFA.in");
         //return token.matches(number) || token.matches(string) || token.matches(character);
         return this.finiteAutomaton.acceptsSequence(token) || token.matches(string) || token.matches(character);
     }

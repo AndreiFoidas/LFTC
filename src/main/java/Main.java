@@ -27,7 +27,7 @@ public class Main {
     }
 
     public static void testFiniteAutomaton(){
-        FiniteAutomaton finiteAutomaton = new FiniteAutomaton("src/files/identifierFA.in");
+        FiniteAutomaton finiteAutomaton = new FiniteAutomaton("src/files/FA.in");
         MenuFiniteAutomaton menu = new MenuFiniteAutomaton(finiteAutomaton);
         menu.run();
     }
@@ -48,5 +48,6 @@ public class Main {
         System.out.println();
         */
         testFiniteAutomaton();
+        //testFiniteAutomaton();
     }
 }

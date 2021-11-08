@@ -6,15 +6,19 @@ import java.io.FileReader;
 import java.util.*;
 
 public class FiniteAutomaton {
-    private final List<String> states, alphabet, finalStates;
+    private List<String> states;
+    private List<String> alphabet;
+    private List<String> finalStates;
     private String initialState;
-    private final Map<AbstractMap.SimpleEntry<String, String>, List<String>> transitions;
+    private Map<AbstractMap.SimpleEntry<String, String>, List<String>> transitions;
+    private String fileName;
 
     public FiniteAutomaton(String filename){
         this.states = new ArrayList<>();
         this.alphabet = new ArrayList<>();
         this.finalStates = new ArrayList<>();
         this.transitions = new HashMap<>();
+        this.fileName = filename;
 
         readFromFile(filename);
     }
@@ -28,6 +32,13 @@ public class FiniteAutomaton {
     }
 
     public void readFromFile(String fileName){
+        this.fileName = fileName;
+        this.states = new ArrayList<>();
+        this.alphabet = new ArrayList<>();
+        this.finalStates = new ArrayList<>();
+        this.transitions = new HashMap<>();
+        this.initialState = "";
+        this.fileName = fileName;
         try{
             File file = new File(fileName);
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -53,7 +64,8 @@ public class FiniteAutomaton {
                 String[] tokens = line.split(" ");
                 AbstractMap.SimpleEntry<String, String> key = new AbstractMap.SimpleEntry<>(tokens[0], tokens[1]);
                 if(this.transitions.containsKey(key)){
-                    this.transitions.get(key).add(tokens[2]);
+                    if(!this.transitions.get(key).contains(tokens[2]))
+                        this.transitions.get(key).add(tokens[2]);
                 }
                 else{
                     ArrayList<String> value = new ArrayList<>(Collections.singletonList(tokens[2]));
@@ -100,6 +112,9 @@ public class FiniteAutomaton {
 
     public boolean acceptsSequence(String sequence){
         if(this.isDeterministic()){
+            if(this.finalStates.contains(initialState) && (sequence.equals("\n") || sequence.length() ==0 ))
+                return true;
+
             String state = this.initialState;
             for(char c: sequence.toCharArray()){
                 var key = new AbstractMap.SimpleEntry<>(state, String.valueOf(c));
@@ -139,13 +154,19 @@ public class FiniteAutomaton {
         return this.transitions;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
     @Override
     public String toString() {
-        return "FiniteAutomaton:" +
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append("FiniteAutomaton:" +
                 "\nstates=" + this.states +
                 "\nalphabet=" + this.alphabet +
                 "\nfinalStates=" + this.finalStates +
                 "\ninitialState='" + this.initialState + '\'' +
-                "\ntransitions=" + this.transitions;
+                "\ntransitions=" + this.transitions);
+        return stringBuilder.toString();
     }
 }
