@@ -1,18 +1,18 @@
-domain/Codification.java
- domain.Codification
-domain/Pair.java
- domain.Pair
-domain/ProgramInternalForm.java
- domain.ProgramInternalForm
-domain/SymbolTable.java
- domain.SymbolTable
 domain/Scanner.java
  domain.Scanner
-domain/FiniteAutomaton.java
- domain.FiniteAutomaton
+domain/SymbolTable.java
+ domain.SymbolTable
+domain/Pair.java
+ domain.Pair
+domain/Codification.java
+ domain.Codification
+domain/ProgramInternalForm.java
+ domain.ProgramInternalForm
 MenuFiniteAutomaton.java
  MenuFiniteAutomaton
-Main.java
- Main
+domain/FiniteAutomaton.java
+ domain.FiniteAutomaton
 domain/Grammar.java
  domain.Grammar
+Main.java
+ Main

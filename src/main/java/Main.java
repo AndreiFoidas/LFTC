@@ -50,7 +50,9 @@ public class Main {
         */
         //testFiniteAutomaton();
         //testFiniteAutomaton();
-        Grammar g = new Grammar("src/files/gr.in");
+        Grammar g = new Grammar("src/files/grammar.in");
         System.out.println(g);
+        System.out.println(g.isValid());
+        System.out.println(g.isCFG());
     }
 }

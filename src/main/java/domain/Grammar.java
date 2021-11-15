@@ -7,10 +7,10 @@ import java.util.*;
 
 public class Grammar {
     String fileName;
-    private List<String> terminals;
-    private List<String> nonTerminals;
+    private final List<String> terminals;
+    private final List<String> nonTerminals;
     private String startingSymbol;
-    private Map<List<String>, List<List<String>>> productions;
+    private final Map<List<String>, List<List<String>>> productions;
 
     public Grammar(String fileName){
         this.terminals = new ArrayList<>();
@@ -29,11 +29,11 @@ public class Grammar {
 
             String line = br.readLine();
             if (line != null){
-                this.terminals.addAll(Arrays.asList(line.split(" ")));
+                this.nonTerminals.addAll(Arrays.asList(line.split(" ")));
             }
             line = br.readLine();
             if (line != null){
-                this.nonTerminals.addAll(Arrays.asList(line.split(" ")));
+                this.terminals.addAll(Arrays.asList(line.split(" ")));
             }
             line = br.readLine();
             if (line != null){
@@ -42,13 +42,21 @@ public class Grammar {
 
             line = br.readLine();
             while (line != null){
+                if(line.length() == 0){
+                    line = br.readLine();
+                    continue;
+                }
+
                 String[] tokens = line.split("->");
+
 
                 List<List<String>> rules = new ArrayList<>();
                 List<String> allRules = List.of(tokens[1].split(("\\|")));
 
                 for (String rule: allRules){
-                    rules.add(Arrays.asList(rule.split(" ")));
+                    List<String> toAdd = new ArrayList<>(List.of(rule.split(" ")));
+                    toAdd.remove("");
+                    rules.add(toAdd);
                 }
 
                 List<String> symbols = List.of(tokens[0].split(" "));
@@ -65,12 +73,64 @@ public class Grammar {
         Map<List<String>, List<List<String>>> productions = new HashMap<>();
         Set<List<String>> keys = this.productions.keySet();
         for(List<String> key: keys){
-            if(key.equals(nonTerminal)){
+            if(key.contains(nonTerminal)){
                 productions.put(key, this.productions.get(key));
             }
         }
 
         return productions;
+    }
+
+    public boolean isValid(){
+        if(!this.nonTerminals.contains(this.startingSymbol))
+            return false;
+        Set<List<String>> keys = this.productions.keySet();
+        for(List<String> key: keys){
+            for(String each: key){
+                if(!this.nonTerminals.contains(each))
+                    return false;
+            }
+
+            List<List<String>> rules = this.productions.get(key);
+            for(List<String> rule: rules){
+                for(String term: rule){
+                    if(!this.terminals.contains(term) && !this.nonTerminals.contains(term) && !term.equals("epsilon")) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isCFG(){
+        Set<List<String>> keys = this.productions.keySet();
+        boolean checkStart = false;
+        for(List<String> key: keys) {
+            if (key.contains(this.startingSymbol)) {
+                checkStart = true;
+                break;
+            }
+        }
+        if(!checkStart)
+            return false;
+
+        for(List<String> key: keys){
+            if(key.size() > 1)
+                return false;
+            if(!this.nonTerminals.contains(key.get(0)))
+                return false;
+
+            List<List<String>> rules = this.productions.get(key);
+            for(List<String> rule: rules){
+                for(String term: rule){
+                    if(!this.terminals.contains(term) && !this.nonTerminals.contains(term) && !term.equals("epsilon"))
+                        return false;
+                }
+            }
+        }
+        return true;
     }
 
     public String getFileName() {
@@ -95,10 +155,10 @@ public class Grammar {
 
     @Override
     public String toString() {
-        return "Grammar" +
+        return "Grammar:" +
                 "\nfileName='" + fileName + '\'' +
-                "\nterminals=" + terminals +
                 "\nnonTerminals=" + nonTerminals +
+                "\nterminals=" + terminals +
                 "\nstartingSymbol='" + startingSymbol + '\'' +
                 "\nproductions=" + productions;
     }
