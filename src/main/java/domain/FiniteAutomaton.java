@@ -32,7 +32,6 @@ public class FiniteAutomaton {
     }
 
     public void readFromFile(String fileName){
-        this.fileName = fileName;
         this.states = new ArrayList<>();
         this.alphabet = new ArrayList<>();
         this.finalStates = new ArrayList<>();

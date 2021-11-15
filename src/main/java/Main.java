@@ -1,4 +1,5 @@
 import domain.FiniteAutomaton;
+import domain.Grammar;
 import domain.Scanner;
 import domain.SymbolTable;
 
@@ -47,7 +48,9 @@ public class Main {
         s3.scanFile("src/files/p1err.txt");
         System.out.println();
         */
-        testFiniteAutomaton();
         //testFiniteAutomaton();
+        //testFiniteAutomaton();
+        Grammar g = new Grammar("src/files/gr.in");
+        System.out.println(g);
     }
 }
