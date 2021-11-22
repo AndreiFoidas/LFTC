@@ -10,7 +10,7 @@ public class Grammar {
     private final List<String> terminals;
     private final List<String> nonTerminals;
     private String startingSymbol;
-    private final Map<List<String>, List<List<String>>> productions;
+    private final HashMap<List<String>, List<List<String>>> productions;
 
     public Grammar(String fileName){
         this.terminals = new ArrayList<>();
@@ -60,7 +60,15 @@ public class Grammar {
                 }
 
                 List<String> symbols = List.of(tokens[0].split(" "));
-                productions.put(symbols, rules);
+
+                if(!this.productions.containsKey(symbols)) {
+                    this.productions.put(symbols, rules);
+                }
+                else {
+                    for( var r: rules)
+                        this.productions.get(symbols).add(r);
+                }
+
 
                 line = br.readLine();
             }

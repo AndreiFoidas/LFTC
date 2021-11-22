@@ -33,6 +33,16 @@ public class Main {
         menu.run();
     }
 
+    public static void testGrammar(){
+        Grammar g = new Grammar("src/files/gr.in");
+        MenuGrammar menu = new MenuGrammar(g);
+        System.out.println(g);
+        System.out.println(g.isValid());
+        System.out.println(g.isCFG());
+
+        menu.run();
+    }
+
     public static void main(String[] args) {
         //testSymbolTable();
         /*Scanner s = new Scanner();
@@ -49,10 +59,7 @@ public class Main {
         System.out.println();
         */
         //testFiniteAutomaton();
-        //testFiniteAutomaton();
-        Grammar g = new Grammar("src/files/grammar.in");
-        System.out.println(g);
-        System.out.println(g.isValid());
-        System.out.println(g.isCFG());
+        testGrammar();
+
     }
 }
