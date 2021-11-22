@@ -77,16 +77,16 @@ public class Grammar {
         }
     }
 
-    public Map<List<String>, List<List<String>>> getProductionForNonTerminal(String nonTerminal){
-        Map<List<String>, List<List<String>>> productions = new HashMap<>();
+    public List<List<String>> getProductionForNonTerminal(String nonTerminal){
+        List<List<String>> result = new ArrayList<>();
         Set<List<String>> keys = this.productions.keySet();
         for(List<String> key: keys){
             if(key.contains(nonTerminal)){
-                productions.put(key, this.productions.get(key));
+                result.addAll(this.productions.get(key));
             }
         }
 
-        return productions;
+        return result;
     }
 
     public boolean isValid(){

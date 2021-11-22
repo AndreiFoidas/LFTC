@@ -37,8 +37,8 @@ public class Main {
         Grammar g = new Grammar("src/files/gr.in");
         MenuGrammar menu = new MenuGrammar(g);
         System.out.println(g);
-        System.out.println(g.isValid());
-        System.out.println(g.isCFG());
+        System.out.println("Is it valid? " + g.isValid());
+        System.out.println("Is it cfg? " + g.isCFG());
 
         menu.run();
     }

@@ -12,9 +12,13 @@ MenuFiniteAutomaton.java
  MenuFiniteAutomaton
 domain/FiniteAutomaton.java
  domain.FiniteAutomaton
+domain/LR0Item.java
+ domain.LR0Item
 domain/Grammar.java
  domain.Grammar
-Main.java
- Main
 MenuGrammar.java
  MenuGrammar
+domain/Parser.java
+ domain.Parser
+Main.java
+ Main
