@@ -1,4 +1,6 @@
-import domain.FiniteAutomaton;
+package menus;
+
+import scanner.FiniteAutomaton;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package domain;
+package parser;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -159,6 +159,12 @@ public class Grammar {
 
     public Map<List<String>, List<List<String>>> getProductions() {
         return productions;
+    }
+
+    public List<String> getTerminalsAndNonTerminals(){
+        List<String> rez = terminals;
+        rez.addAll(nonTerminals);
+        return rez;
     }
 
     @Override

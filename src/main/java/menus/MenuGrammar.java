@@ -1,5 +1,6 @@
-import domain.FiniteAutomaton;
-import domain.Grammar;
+package menus;
+
+import parser.Grammar;
 
 import java.util.Scanner;
 

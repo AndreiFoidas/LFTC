@@ -1,4 +1,6 @@
-package domain;
+package scanner;
+
+import domain.*;
 
 import java.io.FileWriter;
 import java.util.*;

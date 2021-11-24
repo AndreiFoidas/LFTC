@@ -1,24 +1,24 @@
-domain/Scanner.java
- domain.Scanner
-domain/SymbolTable.java
- domain.SymbolTable
 domain/Pair.java
  domain.Pair
-domain/Codification.java
- domain.Codification
-domain/ProgramInternalForm.java
- domain.ProgramInternalForm
-MenuFiniteAutomaton.java
- MenuFiniteAutomaton
-domain/FiniteAutomaton.java
- domain.FiniteAutomaton
-domain/LR0Item.java
- domain.LR0Item
-domain/Grammar.java
- domain.Grammar
-MenuGrammar.java
- MenuGrammar
-domain/Parser.java
- domain.Parser
+parser/Grammar.java
+ parser.Grammar
+scanner/ProgramInternalForm.java
+ scanner.ProgramInternalForm
+scanner/SymbolTable.java
+ scanner.SymbolTable
+menus/MenuFiniteAutomaton.java
+ menus.MenuFiniteAutomaton
+scanner/FiniteAutomaton.java
+ scanner.FiniteAutomaton
+scanner/Codification.java
+ scanner.Codification
+scanner/Scanner.java
+ scanner.Scanner
+menus/MenuGrammar.java
+ menus.MenuGrammar
+parser/Parser.java
+ parser.Parser
 Main.java
  Main
+parser/LR0Item.java
+ parser.LR0Item

@@ -1,4 +1,4 @@
-package domain;
+package scanner;
 
 import java.util.*;
 import java.util.Arrays;

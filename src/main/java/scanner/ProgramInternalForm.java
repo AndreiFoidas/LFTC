@@ -1,4 +1,6 @@
-package domain;
+package scanner;
+
+import domain.Pair;
 
 import java.util.HashMap;
 

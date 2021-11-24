@@ -1,7 +1,9 @@
-import domain.FiniteAutomaton;
-import domain.Grammar;
-import domain.Scanner;
-import domain.SymbolTable;
+import menus.MenuFiniteAutomaton;
+import menus.MenuGrammar;
+import parser.Parser;
+import scanner.FiniteAutomaton;
+import parser.Grammar;
+import scanner.SymbolTable;
 
 public class Main {
 
@@ -59,7 +61,10 @@ public class Main {
         System.out.println();
         */
         //testFiniteAutomaton();
-        testGrammar();
-
+        //testGrammar();
+        Grammar g = new Grammar("src/files/gr.in");
+        Parser p = new Parser(g);
+        System.out.println();
+        System.out.println(p.canonicalCollection());
     }
 }
