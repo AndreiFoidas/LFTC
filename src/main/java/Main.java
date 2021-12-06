@@ -62,9 +62,10 @@ public class Main {
         */
         //testFiniteAutomaton();
         //testGrammar();
-        Grammar g = new Grammar("src/files/gr.in");
+        Grammar g = new Grammar("src/files/gr2.in");
         Parser p = new Parser(g);
         System.out.println();
-        System.out.println(p.canonicalCollection());
+        // p.parseSequence("abbc");
+        p.parseSequence("(x,(x))");
     }
 }

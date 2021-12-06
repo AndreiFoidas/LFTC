@@ -25,7 +25,15 @@ public class LR0Item {
         return content;
     }
 
-    @Override
+    public boolean dotIsLast(){
+        return this.dotPosition == this.content.size();
+    }
+
+    public String toProductionString() {
+        return this.nonTerminal + " -> " + this.getContent();
+    }
+
+        @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof LR0Item)) return false;
@@ -42,10 +50,9 @@ public class LR0Item {
 
     @Override
     public String toString() {
-        return "LR0Item{" +
-                "nonTerminal='" + nonTerminal + '\'' +
+        return "{" +
+                nonTerminal + "->" + content +
                 ", dot=" + dotPosition +
-                ", content=" + content +
                 '}';
     }
 }

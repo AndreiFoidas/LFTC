@@ -1,5 +1,7 @@
 package parser;
 
+import domain.Pair;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,12 +13,14 @@ public class Grammar {
     private final List<String> nonTerminals;
     private String startingSymbol;
     private final HashMap<List<String>, List<List<String>>> productions;
+    private final List<Pair<List<String>, List<String>>> productionOrder;
 
     public Grammar(String fileName){
         this.terminals = new ArrayList<>();
         this.nonTerminals = new ArrayList<>();
         this.productions = new HashMap<>();
         this.fileName = fileName;
+        this.productionOrder = new ArrayList<>();
 
         readGrammar();
     }
@@ -52,14 +56,14 @@ public class Grammar {
 
                 List<List<String>> rules = new ArrayList<>();
                 List<String> allRules = List.of(tokens[1].split(("\\|")));
+                List<String> symbols = List.of(tokens[0].split(" "));
 
                 for (String rule: allRules){
                     List<String> toAdd = new ArrayList<>(List.of(rule.split(" ")));
                     toAdd.remove("");
                     rules.add(toAdd);
+                    this.productionOrder.add(new Pair<>(symbols, toAdd));
                 }
-
-                List<String> symbols = List.of(tokens[0].split(" "));
 
                 if(!this.productions.containsKey(symbols)) {
                     this.productions.put(symbols, rules);
@@ -161,9 +165,14 @@ public class Grammar {
         return productions;
     }
 
+    public List<Pair<List<String>, List<String>>> getProductionOrder() {
+        return productionOrder;
+    }
+
     public List<String> getTerminalsAndNonTerminals(){
-        List<String> rez = terminals;
-        rez.addAll(nonTerminals);
+        List<String> rez = new ArrayList<>();
+        rez.addAll(this.terminals);
+        rez.addAll(this.nonTerminals);
         return rez;
     }
 

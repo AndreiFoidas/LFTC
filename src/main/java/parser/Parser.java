@@ -1,12 +1,20 @@
 package parser;
 
+import domain.Pair;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Parser {
     private final Grammar grammar;
+    private final LR0Table table;
+    private List<List<LR0Item>> canonicalCollection;
 
     public Parser(Grammar grammar){
         this.grammar = grammar;
+        this.table = new LR0Table();
+
+        this.buildLR0Table();
     }
 
     public List<LR0Item> goTo(List<LR0Item> state, String symbol){
@@ -80,5 +88,135 @@ public class Parser {
         }
 
         return collection;
+    }
+
+    public void buildLR0Table(){
+        this.canonicalCollection = this.canonicalCollection();
+
+        for(int i=0; i<this.canonicalCollection.size(); i++){
+            List<LR0Item> state = this.canonicalCollection.get(i);
+
+            LR0TableEntry entry = new LR0TableEntry();
+            entry.stateIndex = i;
+
+            String action = "";
+            if (state.stream().anyMatch(it -> !it.dotIsLast()))
+                action = "shift";
+            else if(state.stream().anyMatch(it -> it.getNonTerminal().equals("S'") && it.dotIsLast()))
+                action = "accept";
+            else if (state.stream().anyMatch(LR0Item::dotIsLast)){
+                LR0Item production = state.stream().filter(LR0Item::dotIsLast).findAny().orElse(null);
+                entry.reduceNonTerminal = production.getNonTerminal();
+                entry.reduceContent = production.getContent();
+                action = "reduce " + production.toProductionString();
+            }
+
+            if (action.equals(""))
+                action = "error";
+
+            this.checkForConflicts(state);
+
+            entry.action = action;
+
+            List<Pair<String, Integer>> goTos = new ArrayList<>();
+            for(String symbol: this.grammar.getTerminalsAndNonTerminals()){
+                List<LR0Item> result = this.goTo(state, symbol);
+                if(!result.isEmpty()){
+                    int stateIndex = this.canonicalCollection.indexOf(result);
+                    goTos.add(new Pair<>(symbol, stateIndex));
+                }
+            }
+
+            entry.shifts = goTos;
+            this.table.entries.add(entry);
+
+            System.out.println(this.table.entries.get(i));
+        }
+    }
+
+    public void parse(Stack<String> inputStack){
+        Stack<Pair<String, Integer>> workingStack = new Stack<>();
+        Stack<String> outputStack = new Stack<>();
+        Stack<Integer> outputNumberStack = new Stack<>();
+
+
+        String lastSymbol = "";
+        int stateIndex = 0;
+        boolean sem = true;
+        workingStack.push(new Pair<>(lastSymbol, stateIndex));
+
+        try{
+            do{
+                LR0TableEntry entry = this.table.entries.get(stateIndex);
+
+                if (entry.action.equals("shift")){
+                    String c = inputStack.pop();
+                    var state = entry.shifts.stream()
+                            .filter(it -> it.getFirst().equals(c)).findAny().orElse(null);
+                    stateIndex = state.getSecond();
+                    lastSymbol = c;
+                    workingStack.push(new Pair<>(lastSymbol, stateIndex));
+                } else if (entry.action.equals("reduce " + entry.reduceProductionString())) {
+                    List<String> reduceContent = new ArrayList<>();
+                    reduceContent.addAll(entry.reduceContent);
+                    while (reduceContent.contains(workingStack.peek().getFirst()) && !workingStack.isEmpty()){
+                        reduceContent.remove(workingStack.peek().getFirst());
+                        workingStack.pop();
+                    }
+                    var state = this.table.entries.get(workingStack.peek().getSecond()).shifts.stream()
+                            .filter(it -> it.getFirst().equals(entry.reduceNonTerminal)).findAny().orElse(null);
+                    stateIndex = state.getSecond();
+                    lastSymbol = entry.reduceNonTerminal;
+                    workingStack.push(new Pair<>(lastSymbol, stateIndex));
+                    outputStack.push(entry.reduceProductionString());
+                    var index = new Pair<>(List.of(entry.reduceNonTerminal), entry.reduceContent);
+                    int productionNumber = this.grammar.getProductionOrder().indexOf(index);
+                    outputNumberStack.push(productionNumber);
+                } else {
+                    if (entry.action.equals("accept")){
+                        List<String> output = new ArrayList<>(outputStack);
+                        Collections.reverse(output);
+                        List<Integer> numberOutput = new ArrayList<>(outputNumberStack);
+                        Collections.reverse(numberOutput);
+
+                        System.out.println("ACCEPTED");
+                        System.out.println("Productions string: " + output);
+                        System.out.println("Production number: " + numberOutput);
+
+                        OutputTree outputTree = new OutputTree();
+                        outputTree.createTreeFromSequence(outputNumberStack, this.grammar);
+                        System.out.println("The output tree: ");
+                        outputTree.printTree(outputTree.getRoot());
+
+
+                        sem = false;
+                    }
+                    if(entry.action.equals("error")){
+                        System.out.println("ERROR at state:" + stateIndex);
+                        sem = false;
+                    }
+                }
+            } while (sem);
+        } catch (NullPointerException ex) {
+            System.out.println("ERROR at state " + stateIndex + " - after symbol " + lastSymbol);
+        }
+    }
+
+    public void checkForConflicts(List<LR0Item> state) {
+        long countDotOnFinalPosition = state.stream().filter(LR0Item::dotIsLast).count();
+        long countDotInMiddle = state.stream().filter(it -> !it.dotIsLast()).count();
+
+        if (countDotOnFinalPosition > 1){
+            throw new RuntimeException("REDUCE - REDUCE conflict for state \n" + state + "\n\nThe given grammar is not LR(0)!");
+        }
+        if(countDotOnFinalPosition == 1 && countDotInMiddle > 0){
+            throw new RuntimeException("SHIFT - REDUCE conflict for state \n" + state + "\n\nThe given grammar is not LR(0)!");
+        }
+    }
+
+    public void parseSequence(String sequence){
+        Stack<String> inputStack = new Stack<>();
+        Arrays.stream(new StringBuilder(sequence).reverse().toString().split( "" )).forEach(inputStack::push);
+        this.parse(inputStack);
     }
 }

@@ -39,7 +39,7 @@ public class SymbolTable {
         return true;
     }
 
-    public Pair search(String key){
+    public Pair<Integer, Integer> search(String key){
         if (this.contains(key)){
             int listPosition = this.hash(key);
             int listIndex = 0;
@@ -50,7 +50,7 @@ public class SymbolTable {
                     break;
             }
 
-            return new Pair(listPosition, listIndex);
+            return new Pair<Integer, Integer>(listPosition, listIndex);
         }
         return null;
     }

@@ -133,7 +133,7 @@ public class Scanner {
             if (this.isIdentifier(token) && !this.isReservedWord(token)){
                 int code = this.codification.getCodes().get("identifier"); // 0
                 this.symbolTable.add(token);
-                Pair position = this.symbolTable.search(token);
+                Pair<Integer, Integer> position = this.symbolTable.search(token);
                 this.pif.add(code, position);
 
                 output.append("Token " + token + " on position: " + position + "\n");
@@ -141,7 +141,7 @@ public class Scanner {
             else if (this.isConstant(token)){
                 int code = this.codification.getCodes().get("constant");
                 this.symbolTable.add(token);
-                Pair position = this.symbolTable.search(token);
+                Pair<Integer, Integer> position = this.symbolTable.search(token);
                 this.pif.add(code, position);
 
                 output.append("Token " + token + " on position: " + position + "\n");
@@ -153,7 +153,7 @@ public class Scanner {
                 if (!token.equals("-0") && !token.equals("+0")){
                     int code = this.codification.getCodes().get("constant");
                     this.symbolTable.add(token);
-                    Pair position = this.symbolTable.search(token);
+                    Pair<Integer, Integer> position = this.symbolTable.search(token);
                     this.pif.add(code, position);
 
                     output.append("Token " + token + " on position: " + position + "\n");
@@ -166,9 +166,9 @@ public class Scanner {
             }
             else if (this.isOperator(token) || this.isSeparator(token) || this.isReservedWord(token)){
                 int code = this.codification.getCodes().get(token);
-                this.pif.add(code, new Pair(-1, -1));
+                this.pif.add(code, new Pair<Integer, Integer>(-1, -1));
 
-                output.append("Token " + token + " on position: " + new Pair(-1, -1) + "\n");
+                output.append("Token " + token + " on position: " + new Pair<Integer, Integer>(-1, -1) + "\n");
             }
             else {
                 System.out.println("Error at line: " + line + ". Invalid token " + token);
