@@ -20,6 +20,14 @@ public class TreeNode {
         this.index = index;
     }
 
+    public TreeNode getLeftChild() {
+        return leftChild;
+    }
+
+    public void setLeftChild(TreeNode leftChild) {
+        this.leftChild = leftChild;
+    }
+
     public String getInfo() {
         return info;
     }
@@ -44,13 +52,6 @@ public class TreeNode {
         this.rightSibling = rightSibling;
     }
 
-    public TreeNode getLeftChild() {
-        return leftChild;
-    }
-
-    public void setLeftChild(TreeNode leftChild) {
-        this.leftChild = leftChild;
-    }
 
     public int getLevel() {
         return level;
@@ -65,9 +66,9 @@ public class TreeNode {
         return "TreeNode: " +
                 "index=" + index +
                 ", info='" + info + '\'' +
-                ", parent=" + (parent != null ? parent.getIndex() : -1) +
-                ", rightSibling=" + (rightSibling != null ? rightSibling.getIndex() : -1) +
                 ", leftChild=" + (leftChild != null ? leftChild.getIndex() : -1) +
+                ", rightSibling=" + (rightSibling != null ? rightSibling.getIndex() : -1) +
+                ", parent=" + (parent != null ? parent.getIndex() : -1) +
                 ", level=" + level;
     }
 }

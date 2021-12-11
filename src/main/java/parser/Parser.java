@@ -183,11 +183,10 @@ public class Parser {
                         System.out.println("Productions string: " + output);
                         System.out.println("Production number: " + numberOutput);
 
-                        OutputTree outputTree = new OutputTree();
-                        outputTree.createTreeFromSequence(outputNumberStack, this.grammar);
+                        OutputTree outputTree = new OutputTree(this.grammar);
+                        outputTree.generateTreeFromSequence(numberOutput);
                         System.out.println("The output tree: ");
                         outputTree.printTree(outputTree.getRoot());
-
 
                         sem = false;
                     }
@@ -207,10 +206,12 @@ public class Parser {
         long countDotInMiddle = state.stream().filter(it -> !it.dotIsLast()).count();
 
         if (countDotOnFinalPosition > 1){
-            throw new RuntimeException("REDUCE - REDUCE conflict for state \n" + state + "\n\nThe given grammar is not LR(0)!");
+            //throw new RuntimeException("REDUCE - REDUCE conflict for state \n" + state + "\n\nThe given grammar is not LR(0)!");
+            System.out.println("REDUCE - REDUCE conflict for state \n" + state + "\n\nThe given grammar is not LR(0)!");
         }
         if(countDotOnFinalPosition == 1 && countDotInMiddle > 0){
-            throw new RuntimeException("SHIFT - REDUCE conflict for state \n" + state + "\n\nThe given grammar is not LR(0)!");
+            //throw new RuntimeException("SHIFT - REDUCE conflict for state \n" + state + "\n\nThe given grammar is not LR(0)!");
+            System.out.println("SHIFT - REDUCE conflict for state \n" + state + "\n\nThe given grammar is not LR(0)!");
         }
     }
 
