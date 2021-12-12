@@ -1,32 +1,32 @@
 parser/LR0Table.java
  parser.LR0Table
-domain/Pair.java
- domain.Pair
-menus/MenuFiniteAutomaton.java
- menus.MenuFiniteAutomaton
 parser/LR0Item.java
  parser.LR0Item
-scanner/Scanner.java
- scanner.Scanner
+menus/MenuFiniteAutomaton.java
+ menus.MenuFiniteAutomaton
+parser/TreeNode.java
+ parser.TreeNode
+domain/Pair.java
+ domain.Pair
 parser/Grammar.java
  parser.Grammar
 parser/LR0TableEntry.java
  parser.LR0TableEntry
 scanner/ProgramInternalForm.java
  scanner.ProgramInternalForm
-menus/MenuGrammar.java
- menus.MenuGrammar
-parser/TreeNode.java
- parser.TreeNode
-scanner/SymbolTable.java
- scanner.SymbolTable
 scanner/FiniteAutomaton.java
  scanner.FiniteAutomaton
 scanner/Codification.java
  scanner.Codification
-Main.java
- Main
-parser/Parser.java
- parser.Parser
+scanner/SymbolTable.java
+ scanner.SymbolTable
+menus/MenuGrammar.java
+ menus.MenuGrammar
+scanner/Scanner.java
+ scanner.Scanner
 parser/OutputTree.java
  parser.OutputTree
+parser/Parser.java
+ parser.Parser
+Main.java
+ Main

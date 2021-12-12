@@ -3,6 +3,7 @@ import menus.MenuGrammar;
 import parser.Parser;
 import scanner.FiniteAutomaton;
 import parser.Grammar;
+import scanner.Scanner;
 import scanner.SymbolTable;
 
 public class Main {
@@ -45,6 +46,15 @@ public class Main {
         menu.run();
     }
 
+    public static void testParser(){
+        Grammar g = new Grammar("src/files/grammarBun.in");
+        System.out.println(g.isValid());
+        System.out.println(g.isCFG());
+        Parser p = new Parser(g);
+        System.out.println();
+        p.parseFile("src/files/p3.txt");
+    }
+
     public static void main(String[] args) {
         //testSymbolTable();
         /*Scanner s = new Scanner();
@@ -62,10 +72,9 @@ public class Main {
         */
         //testFiniteAutomaton();
         //testGrammar();
-        Grammar g = new Grammar("src/files/gr2.in");
-        Parser p = new Parser(g);
-        System.out.println();
+
         // p.parseSequence("abbc");
-        p.parseSequence("(x,(x))");
+        // p.parseSequence("(x,())");
+        testParser();
     }
 }

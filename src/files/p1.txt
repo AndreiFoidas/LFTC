@@ -16,6 +16,10 @@ START
 	{
 		maxim = c;
 	}
+	else
+	{
+	    c = add(0,mul(sub(0,3),4));
+	}
 	string text;
 	text = "Maximum is: ";
 	write(text); write(maxim);

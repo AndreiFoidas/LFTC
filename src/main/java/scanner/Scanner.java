@@ -18,9 +18,13 @@ public class Scanner {
     public Scanner() {
     }
 
+    public ProgramInternalForm getPif() {
+        return pif;
+    }
+
     public void scanFile(String fileName) {
         try {
-            System.out.println(codification.getCodes());
+            //System.out.println(codification.getCodes());
 
             File file = new File(fileName);
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -30,7 +34,7 @@ public class Scanner {
             boolean lexicallyCorrect = true;
             while((line = br.readLine()) != null){
                 List<String> tokenList = this.tokenizeLine(line);
-                System.out.println(tokenList);
+                //System.out.println(tokenList);
                 boolean result = this.scanLine(tokenList, i, output);
                 lexicallyCorrect = lexicallyCorrect && result;
                 i++;
@@ -135,6 +139,7 @@ public class Scanner {
                 this.symbolTable.add(token);
                 Pair<Integer, Integer> position = this.symbolTable.search(token);
                 this.pif.add(code, position);
+                this.pif.addToTokens("identifier");
 
                 output.append("Token " + token + " on position: " + position + "\n");
             }
@@ -143,6 +148,7 @@ public class Scanner {
                 this.symbolTable.add(token);
                 Pair<Integer, Integer> position = this.symbolTable.search(token);
                 this.pif.add(code, position);
+                this.pif.addToTokens("constant");
 
                 output.append("Token " + token + " on position: " + position + "\n");
             }
@@ -155,6 +161,7 @@ public class Scanner {
                     this.symbolTable.add(token);
                     Pair<Integer, Integer> position = this.symbolTable.search(token);
                     this.pif.add(code, position);
+                    this.pif.addToTokens(token);
 
                     output.append("Token " + token + " on position: " + position + "\n");
                 }
@@ -167,6 +174,7 @@ public class Scanner {
             else if (this.isOperator(token) || this.isSeparator(token) || this.isReservedWord(token)){
                 int code = this.codification.getCodes().get(token);
                 this.pif.add(code, new Pair<Integer, Integer>(-1, -1));
+                this.pif.addToTokens(token);
 
                 output.append("Token " + token + " on position: " + new Pair<Integer, Integer>(-1, -1) + "\n");
             }

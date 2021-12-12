@@ -1,9 +1,9 @@
 package parser;
 
 import domain.Pair;
+import scanner.Scanner;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Parser {
     private final Grammar grammar;
@@ -144,9 +144,10 @@ public class Parser {
         int stateIndex = 0;
         boolean sem = true;
         workingStack.push(new Pair<>(lastSymbol, stateIndex));
-
+        LR0TableEntry lastEntry = null;
         try{
             do{
+                lastEntry = this.table.entries.get(stateIndex);
                 LR0TableEntry entry = this.table.entries.get(stateIndex);
 
                 if (entry.action.equals("shift")){
@@ -191,13 +192,14 @@ public class Parser {
                         sem = false;
                     }
                     if(entry.action.equals("error")){
-                        System.out.println("ERROR at state:" + stateIndex);
+                        System.out.println("ERROR at state: " + stateIndex);
                         sem = false;
                     }
                 }
             } while (sem);
         } catch (NullPointerException ex) {
             System.out.println("ERROR at state " + stateIndex + " - after symbol " + lastSymbol);
+            System.out.println(lastEntry);
         }
     }
 
@@ -218,6 +220,20 @@ public class Parser {
     public void parseSequence(String sequence){
         Stack<String> inputStack = new Stack<>();
         Arrays.stream(new StringBuilder(sequence).reverse().toString().split( "" )).forEach(inputStack::push);
+        this.parse(inputStack);
+    }
+
+    public void parseFile(String fileName){
+        Stack<String> inputStack = new Stack<>();
+
+        Scanner scanner = new Scanner();
+        scanner.scanFile(fileName);
+
+        ArrayList<String> pifElements = (ArrayList<String>) scanner.getPif().getTokens();
+
+        for(int i = pifElements.size() - 1; i >= 0; i--){
+            inputStack.push(pifElements.get(i));
+        }
         this.parse(inputStack);
     }
 }

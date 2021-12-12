@@ -9,8 +9,8 @@ START
     {
         int nr;
         read(nr);
-        sum = sum + nr;
-        i = i + 1;
+        sum = add(sum,nr);
+        i = add(i,1);
     }
     write(sum);
 END.

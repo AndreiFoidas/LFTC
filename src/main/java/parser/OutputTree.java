@@ -22,7 +22,7 @@ public class OutputTree {
 
     public TreeNode generateTreeFromSequence(List<Integer> inputSequence){
         int productionIndex = inputSequence.get(0);
-        System.out.println(inputSequence);
+        //System.out.println(inputSequence);
         Pair<List<String>,List<String>> productionString = this.grammar.getProductionOrder().get(productionIndex);
         this.root = new TreeNode(productionString.getFirst().get(0));
         this.root.setIndex(0);

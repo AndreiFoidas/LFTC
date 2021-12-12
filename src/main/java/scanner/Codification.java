@@ -6,9 +6,9 @@ import java.util.HashMap;
 
 public class Codification {
 
-    private final String[] separators = {"[", "]", "(", ")", "{", "}", ":", ";", " ", "\n", "\t"};
+    private final String[] separators = {"[", "]", "(", ")", "{", "}", ":", ";", " ", ",", "\n", "\t"};
     private final String[] operators = {"+", "-", "/", "*", "%", "=", "<", "<=", "==", ">=", ">", "!=", "!", "&&", "||"};
-    private final String[] reservedWords = {"int", "string", "bool", "char", "return", "if", "else", "while", "do", "read", "write", "struct", "START", "END."};
+    private final String[] reservedWords = {"int", "add", "sub", "mul", "div", "mod", "pow", "string", "bool", "char", "return", "if", "else", "while", "do", "read", "write", "struct", "START", "END."};
 
     private HashMap<String, Integer> codes;
 

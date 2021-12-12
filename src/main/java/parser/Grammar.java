@@ -125,20 +125,30 @@ public class Grammar {
                 break;
             }
         }
-        if(!checkStart)
+        if(!checkStart) {
+            System.out.println("Failed check start!");
             return false;
+        }
 
         for(List<String> key: keys){
-            if(key.size() > 1)
+            if(key.size() > 1) {
+                System.out.println("More than one on left!");
                 return false;
-            if(!this.nonTerminals.contains(key.get(0)))
+            }
+            if(!this.nonTerminals.contains(key.get(0))) {
+                System.out.println("NonTerminal doesnt contain key!");
+                System.out.println(key.get(0));
                 return false;
+            }
 
             List<List<String>> rules = this.productions.get(key);
             for(List<String> rule: rules){
                 for(String term: rule){
-                    if(!this.terminals.contains(term) && !this.nonTerminals.contains(term) && !term.equals("epsilon"))
+                    if(!this.terminals.contains(term) && !this.nonTerminals.contains(term) && !term.equals("epsilon")) {
+                        System.out.println("Not terminal or nonterminal or epsilon");
+                        System.out.println(term);
                         return false;
+                    }
                 }
             }
         }

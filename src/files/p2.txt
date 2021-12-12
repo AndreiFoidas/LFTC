@@ -5,7 +5,7 @@ START
     while (b != 0)
     {
         int r;
-        r = a % b;
+        r = mod(a,b);
         a = b;
         b = r;
     }
