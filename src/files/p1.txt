@@ -7,7 +7,7 @@ START
 	if (a > b)
 	{
 		maxim = a;
-	}
+    }
 	else
 	{
 		maxim = b;
@@ -18,7 +18,7 @@ START
 	}
 	else
 	{
-	    c = add(0,mul(sub(0,3),4));
+	    c = add(0,mul(sub(0,5),4));
 	}
 	string text;
 	text = "Maximum is: ";

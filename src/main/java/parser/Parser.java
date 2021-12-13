@@ -61,8 +61,6 @@ public class Parser {
     public List<List<LR0Item>> canonicalCollection(){
         List<List<LR0Item>> collection = new ArrayList<>();
 
-        var rez = this.grammar.getProductionForNonTerminal(this.grammar.getStartingSymbol());
-        List<String> content = rez.get(0);
         LR0Item startingItem = new LR0Item("S'", 0, Collections.singletonList(this.grammar.getStartingSymbol()));
 
         List<LR0Item> startingState = new ArrayList<>();
@@ -145,8 +143,11 @@ public class Parser {
         boolean sem = true;
         workingStack.push(new Pair<>(lastSymbol, stateIndex));
         LR0TableEntry lastEntry = null;
+        String onError = null;
         try{
             do{
+                if (!inputStack.isEmpty())
+                    onError = inputStack.peek();
                 lastEntry = this.table.entries.get(stateIndex);
                 LR0TableEntry entry = this.table.entries.get(stateIndex);
 
@@ -180,7 +181,7 @@ public class Parser {
                         List<Integer> numberOutput = new ArrayList<>(outputNumberStack);
                         Collections.reverse(numberOutput);
 
-                        System.out.println("ACCEPTED");
+                        System.out.println("\nACCEPTED");
                         System.out.println("Productions string: " + output);
                         System.out.println("Production number: " + numberOutput);
 
@@ -198,7 +199,7 @@ public class Parser {
                 }
             } while (sem);
         } catch (NullPointerException ex) {
-            System.out.println("ERROR at state " + stateIndex + " - after symbol " + lastSymbol);
+            System.out.println("ERROR at state " + stateIndex + " - before symbol " + onError);
             System.out.println(lastEntry);
         }
     }
@@ -227,7 +228,10 @@ public class Parser {
         Stack<String> inputStack = new Stack<>();
 
         Scanner scanner = new Scanner();
-        scanner.scanFile(fileName);
+        boolean correct = scanner.scanFile(fileName);
+
+        if(!correct)
+            return;
 
         ArrayList<String> pifElements = (ArrayList<String>) scanner.getPif().getTokens();
 

@@ -32,13 +32,13 @@ public class OutputTree {
         return this.root;
     }
 
-    public TreeNode buildRecursive(int level, TreeNode parent, List<String> currentTransition, List<Integer> inputSequence){
-        //System.out.println("start " + currentTransition);
-        if (currentTransition.isEmpty() || this.indexInInput >= inputSequence.size() + 1) {
+    public TreeNode buildRecursive(int level, TreeNode parent, List<String> currentContent, List<Integer> inputSequence){
+        //System.out.println("start " + currentContent);
+        if (currentContent.isEmpty() || this.indexInInput >= inputSequence.size() + 1) {
             return null;
         }
 
-        String currentSymbol = currentTransition.get(0);
+        String currentSymbol = currentContent.get(0);
 
         if (this.grammar.getTerminals().contains(currentSymbol)){
             TreeNode node = new TreeNode(currentSymbol);
@@ -47,7 +47,7 @@ public class OutputTree {
             node.setLevel(level);
             node.setParent(parent);
             //System.out.println("terminal " + currentSymbol);
-            List<String> newList = new ArrayList<>(currentTransition);
+            List<String> newList = new ArrayList<>(currentContent);
             newList.remove(0);
             node.setRightSibling(buildRecursive(level, parent, newList, inputSequence));
 
@@ -67,7 +67,7 @@ public class OutputTree {
             this.indexInInput++;
             node.setLeftChild(buildRecursive(newLevel, node, productionString.getSecond(), inputSequence));
             //System.out.println("non terminal " + currentSymbol);
-            List<String> newList = new ArrayList<>(currentTransition);
+            List<String> newList = new ArrayList<>(currentContent);
             newList.remove(0);
             node.setRightSibling(buildRecursive(level, parent, newList, inputSequence));
 

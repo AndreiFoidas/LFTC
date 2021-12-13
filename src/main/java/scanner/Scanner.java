@@ -22,7 +22,7 @@ public class Scanner {
         return pif;
     }
 
-    public void scanFile(String fileName) {
+    public boolean scanFile(String fileName) {
         try {
             //System.out.println(codification.getCodes());
 
@@ -39,18 +39,26 @@ public class Scanner {
                 lexicallyCorrect = lexicallyCorrect && result;
                 i++;
             }
-            if(lexicallyCorrect)
-                System.out.println("Program is correct!");
-            else
+
+            boolean sem = false;
+            if(lexicallyCorrect) {
+                System.out.println("Program is lexically correct!");
+                sem = true;
+            }
+            else {
                 System.out.println("Program has lexical errors!");
+                sem = false;
+            }
 
             //System.out.println(symbolTable);
             //System.out.println(output);
             // System.out.println(this.symbolTable);
             // System.out.println(this.pif);
             this.writeOutputToFile(fileName, output);
+            return sem;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 

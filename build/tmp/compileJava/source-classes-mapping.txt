@@ -22,11 +22,11 @@ scanner/SymbolTable.java
  scanner.SymbolTable
 menus/MenuGrammar.java
  menus.MenuGrammar
-scanner/Scanner.java
- scanner.Scanner
 parser/OutputTree.java
  parser.OutputTree
 parser/Parser.java
  parser.Parser
 Main.java
  Main
+scanner/Scanner.java
+ scanner.Scanner

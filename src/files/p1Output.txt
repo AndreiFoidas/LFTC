@@ -1,9 +1,8 @@
 
 Symbol Table
 Pos	Token
-1	[3]
 2	[4]
-3	[text]
+3	[5, text]
 40	[maxim]
 44	["Maximum is: "]
 47	[a]
@@ -83,7 +82,7 @@ Token sub on position: (-1,-1)
 Token ( on position: (-1,-1)
 Token 0 on position: (48,1)
 Token , on position: (-1,-1)
-Token 3 on position: (1,0)
+Token 5 on position: (3,0)
 Token ) on position: (-1,-1)
 Token , on position: (-1,-1)
 Token 4 on position: (2,0)
@@ -92,15 +91,15 @@ Token ) on position: (-1,-1)
 Token ; on position: (-1,-1)
 Token } on position: (-1,-1)
 Token string on position: (-1,-1)
-Token text on position: (3,0)
+Token text on position: (3,1)
 Token ; on position: (-1,-1)
-Token text on position: (3,0)
+Token text on position: (3,1)
 Token = on position: (-1,-1)
 Token "Maximum is: " on position: (44,0)
 Token ; on position: (-1,-1)
 Token write on position: (-1,-1)
 Token ( on position: (-1,-1)
-Token text on position: (3,0)
+Token text on position: (3,1)
 Token ) on position: (-1,-1)
 Token ; on position: (-1,-1)
 Token write on position: (-1,-1)

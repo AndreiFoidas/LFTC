@@ -52,7 +52,7 @@ public class Main {
         System.out.println(g.isCFG());
         Parser p = new Parser(g);
         System.out.println();
-        p.parseFile("src/files/p3.txt");
+        p.parseFile("src/files/p1.txt");
     }
 
     public static void main(String[] args) {
@@ -72,9 +72,11 @@ public class Main {
         */
         //testFiniteAutomaton();
         //testGrammar();
+        Grammar g = new Grammar("src/files/gr.in");
+        Parser p = new Parser(g);
 
-        // p.parseSequence("abbc");
+        p.parseSequence("abbc");
         // p.parseSequence("(x,())");
-        testParser();
+       testParser();
     }
 }
